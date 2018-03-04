@@ -26,3 +26,5 @@ for file in os.listdir(dir_src):
 print ("Syncing Bucket data to AWS S3...")
 cmd_args = ['aws', 's3', 'sync', './backup/','s3://mydata-1/','--storage-class','STANDARD_IA']
 s3_folder_data  = subprocess.call(cmd_args)
+
+os.popen('rm -rf ./backup/*')
