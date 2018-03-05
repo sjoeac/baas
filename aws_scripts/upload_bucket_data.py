@@ -27,4 +27,6 @@ print ("Syncing Bucket data to AWS S3...")
 cmd_args = ['aws', 's3', 'sync', './backup/','s3://mydata-1/','--storage-class','STANDARD_IA']
 s3_folder_data  = subprocess.call(cmd_args)
 
-os.popen('rm -rf ./backup/*')
+shutil.rmtree('./backup')
+if not os.path.exists(dir_src):
+    os.makedirs(dir_src)
