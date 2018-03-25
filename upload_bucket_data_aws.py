@@ -7,6 +7,7 @@ from zipfile import ZipFile
 import re
 import logging
 import sys
+import pickle
 import requests
 
 
@@ -16,6 +17,7 @@ logging.basicConfig(format='%(asctime)s %(message)s', filename="backup.log", lev
 #Email paramaters
 sender_email = 'test@test.com'
 sender_name = 'Stephen'
+content = ''
  
 #logging.debug("This is a debug message")
 #logging.info("Informational message")
@@ -48,9 +50,9 @@ for file in os.listdir(dir_src):
             shutil.rmtree(dir_dst)
 
 
-print ("Start Syncing Bucket data to GCP Storage...")
+print ("Start Syncing Bucket data to AWS Storage...")
 logging.info ("Start Syncing Bucket data to GCP Storage...")
-cmd_args = ['gsutil', 'rsync', '-r', './backup/', 'gs://mydata-1']
+cmd_args = ['aws', 's3', 'sync', './backup/','s3://mydata-1/','--storage-class','STANDARD_IA']
 
 try:
     data = subprocess.check_output(cmd_args)
@@ -76,6 +78,7 @@ headers = {
     'authorization': "Bearer SG.<fc>",
     'content-type': "application/json"
     }
+
 
 response = requests.request("POST", url, data=payload, headers=headers)
 
