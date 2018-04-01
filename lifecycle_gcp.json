@@ -1,0 +1,1 @@
+{"rule": [{"action": {"storageClass": "COLDLINE", "type": "SetStorageClass"}, "condition": {"age": 3, "matchesStorageClass": ["REGIONAL", "STANDARD", "DURABLE_REDUCED_AVAILABILITY", "NEARLINE"]}}]}
