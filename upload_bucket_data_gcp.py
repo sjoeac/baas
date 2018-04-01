@@ -7,6 +7,7 @@ from zipfile import ZipFile
 import re
 import logging
 import sys
+import pickle
 import requests
 
 
@@ -14,8 +15,10 @@ import requests
 logging.basicConfig(format='%(asctime)s %(message)s', filename="backup.log", level=logging.INFO)
 
 #Email paramaters
-sender_email = 'test@test.com'
+sender_email = '@gmail.com'
 sender_name = 'Stephen'
+subject = 'Bucket Testing'
+content = 'email content here...'
  
 #logging.debug("This is a debug message")
 #logging.info("Informational message")
@@ -55,36 +58,32 @@ cmd_args = ['gsutil', 'rsync', '-r', './backup/', 'gs://mydata-1']
 try:
     data = subprocess.check_output(cmd_args)
     logging.info ("Sync Completed...")
-    content = "Sync Completed..."
+    content = "Sync Completed..." 
 except Exception as e:
     logging.info(e)
     content = e
 
-
 print ("Cleaning up...")
 logging.info ("Cleaning up...")
-
-
 
 for file in os.listdir(dir_src):
     if os.path.isdir(dir_src + file):
         shutil.rmtree(dir_src + file)
 
-payload = '{"personalizations":[{"to":[{"email":"' + sender_email + '","name":"'+ sender_name +'"}],"subject":"Hello, World!"}],"from":{"email":"' + sender_email + '","name":"' + sender_name + '"},"reply_to":{"email":"' + sender_email + '","name":"' + sender_name + '"},"subject":"Hello, World!","content":[{"type":"text/html","value":"' + content + '"}]}'
+payload = '{"personalizations":[{"to":[{"email":"' + sender_email + '","name":"'+ sender_name +'"}],"subject":"' + subject + '"}],"from":{"email":"' + sender_email + '","name":"' + sender_name + '"},"reply_to":{"email":"' + sender_email + '","name":"' + sender_name + '"},"subject":"' + subject + '","content":[{"type":"text/html","value":"' + content + '"}]}'
+
 
 headers = {
-    'authorization': "Bearer SG.<fc>",
+    'authorization': "Bearer SG.c",
     'content-type': "application/json"
     }
 
 response = requests.request("POST", url, data=payload, headers=headers)
+
 
 if response.status_code == 202:
     logging.info ("Emailed Sent Status Sucessful..." + now )
 else:
     logging.info ("Emailed Sent Status Failure..." + now )
 
-
-
 logging.info ("Backup Process Ended..." + now )
-
