@@ -1,0 +1,54 @@
+References
+-------------
+https://docs.aws.amazon.com/cli/latest/userguide/installing.html
+https://www.python.org/downloads/release/python-2715/
+https://gist.github.com/nascimento/422a3e59ed9dddea7ee2
+
+ubuntu:
+--------------
+sudo apt-get install python unzip wget -y
+python --version
+Python 2.6.6
+sudo wget  https://s3.amazonaws.com/aws-cli/awscli-bundle.zip 
+sudo unzip awscli-bundle.zip
+sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+
+
+Redhat/Fedora/Centos
+------------------------
+yum install python wget unzip -y
+python --version
+Python 2.6.6
+wget  https://s3.amazonaws.com/aws-cli/awscli-bundle.zip 
+unzip awscli-bundle.zip
+./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+
+
+Suse
+----
+zypper update
+zypper install -y wget unzip python-setuptools
+python --version
+Python 2.7.13
+wget  https://s3.amazonaws.com/aws-cli/awscli-bundle.zip --no-check-certificate
+unzip awscli-bundle.zip
+./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+aws s3 help or 
+aws s3 man
+
+
+
+
+
+Mac
+----
+TBD
+
+
+
+Windows
+--------
+TBD
+
+
+
